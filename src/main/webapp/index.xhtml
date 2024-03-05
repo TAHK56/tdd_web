@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+<f:view>
+    <h:head>
+        <meta charset="UTF-8"/>
+        <title>Calculate Function</title>
+        <h:outputStylesheet library="css" name="main.css"/>
+    </h:head>
+    <h:body>
+        <h1>Perform calculation</h1>
+        <ui:debug hotkey="x"/>
+        <h:form id="calculationForm">
+            Coefficient a:
+            <h:inputText id="firstCoefficient" value="#{functionCalculatorBean.firstCoefficient}"/>
+            <br/>
+            Coefficient b:
+            <h:inputText id="secondCoefficient" value="#{functionCalculatorBean.secondCoefficient}"/>
+            <br/>
+            Coefficient c:
+            <h:inputText id="freeCoefficient" value="#{functionCalculatorBean.freeCoefficient}"/>
+            <br/>
+            Begin segment:
+            <h:inputText id="begin" value="#{functionCalculatorBean.begin}"/>
+            <br/>
+            End segment:
+            <h:inputText id="end" value="#{functionCalculatorBean.end}"/>
+            <br/>
+            Step:
+            <h:inputText id="step" value="#{functionCalculatorBean.step}"/>
+            <br/>
+
+            Number:
+            <h:inputText id="numberCalculate" value="#{functionCalculatorBean.numberCalculate}"/>
+            <br/>
+            Calculation Type:
+            <h:selectOneMenu id="calculationType" value="#{functionCalculatorBean.calculationType}">
+                <f:selectItems value="#{functionCalculatorBean.operationList}"/>
+            </h:selectOneMenu>
+            <br/>
+            Result:
+            <h:outputText id="result" value="#{functionCalculatorBean.result}"/>
+            <br/>
+            Point:
+            <h:outputText id="point" value="#{functionCalculatorBean.point}"/>
+            <br/>
+            <h:commandButton action ="#{functionCalculatorBean.performCalculation()}" value="calculate"/>
+            <br />
+            Point(s):
+            <h:dataTable value="#{functionCalculatorBean.points}" var="p">
+                <h:column>
+                    <f:facet name="header">x</f:facet>
+                    #{p.x()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">y</f:facet>
+                    #{p.y()}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
